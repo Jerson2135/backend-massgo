@@ -99,8 +99,10 @@ if os.path.isdir(DASHBOARD):
 
 @app.get("/")
 async def root():
-    from fastapi.responses import RedirectResponse
-    return RedirectResponse(url="/tienda/")
+    if os.path.isdir(MASSGO_WEB):
+        from fastapi.responses import RedirectResponse
+        return RedirectResponse(url="/tienda/")
+    return {"status": "healthy", "api": "MassGO backend running", "docs": "/docs"}
 
 
 @app.get("/health")
