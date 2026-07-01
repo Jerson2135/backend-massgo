@@ -17,8 +17,8 @@ class Settings:
     OPENAI_API_KEY: str = os.getenv("OPENAI_API_KEY", "")
 
     # OpenWA
-    OPENWA_BASE: str = "http://localhost:2785"
-    OPENWA_API_KEY: str = os.getenv("OPENWA_API_KEY", "dev-admin-key")
+    OPENWA_BASE: str = "https://openwa-production-5dc3.up.railway.app"
+    OPENWA_API_KEY: str = os.getenv("OPENWA_API_KEY", "owa_k1_4e6a073c0d5394c7737b7b8aa541937f1c52613b4edf4f926ff929a9e00f0667")
     WEBHOOK_SECRET: str = os.getenv("WEBHOOK_SECRET", "massgo-wa-hmac-2026")
 
     # Servidor
