@@ -85,14 +85,16 @@ async def get_public_config():
         "api_url": f"{'https' if settings.ENVIRONMENT == 'production' else 'http'}://{settings.HOST}:{settings.PORT}/api",
     }
 
-# ── Servir archivos estáticos (frontend) ──
-BASE = os.path.dirname(os.path.abspath(__file__))       # backend/
-PROJECT = os.path.join(BASE, "..")                      # MassGo/
-MASSGO_WEB = os.path.join(PROJECT, "MassGo")            # MassGo/MassGo/
-DASHBOARD = os.path.join(PROJECT, "Dashboard")          # MassGo/Dashboard/
+# ── Servir archivos estáticos (frontend) solo si existen ──
+BASE = os.path.dirname(os.path.abspath(__file__))
+PROJECT = os.path.join(BASE, "..")
+MASSGO_WEB = os.path.join(PROJECT, "MassGo")
+DASHBOARD = os.path.join(PROJECT, "Dashboard")
 
-app.mount("/tienda", StaticFiles(directory=MASSGO_WEB, html=True), name="tienda")
-app.mount("/admin", StaticFiles(directory=DASHBOARD, html=True), name="admin")
+if os.path.isdir(MASSGO_WEB):
+    app.mount("/tienda", StaticFiles(directory=MASSGO_WEB, html=True), name="tienda")
+if os.path.isdir(DASHBOARD):
+    app.mount("/admin", StaticFiles(directory=DASHBOARD, html=True), name="admin")
 
 
 @app.get("/")
